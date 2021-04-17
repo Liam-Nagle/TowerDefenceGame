@@ -85,6 +85,7 @@ public class Spawner : MonoBehaviour
         spawn = true;
     }
 
+    //Checks all enemies are dead before advancing to the next wave
     void nextWave()
     {
         if(EnemiesAlive <= 0)
@@ -104,18 +105,21 @@ public class Spawner : MonoBehaviour
         }
     }
 
+    //Creates a clone of that enemies prefab, increments enemies alive count
     void SpawnEnemy(Enemy enemy)
     {
-        Instantiate(enemy, spawnPoint.position, spawnPoint.rotation);
+        Instantiate(enemy, spawnPoint);
         EnemiesAlive++;
     }
 
+    //Future formula to determine enemies per wave, design to be procedural but not currently in use
     int enemiesPerWave()
     {
         int rsp = (int)((0.15 * waveIndex) * (24 + 6 * (Difficulty - 1)));
         return rsp;
     }
 
+    //Increase difficulty as wave increases, not in use
     void raiseDifficulty()
     {
         if (waveIndex / Difficulty == 1)
