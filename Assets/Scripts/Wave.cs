@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Wave : MonoBehaviour
+public class Wave
 {
-        public EnemyBlueprint[] enemyWave;
+    public List<EnemyBlueprint> enemyWave;
 
 
-    public void AddWave(EnemyBlueprint[] EnemyBP)
+    public Wave(List<EnemyBlueprint> EnemyBP)
     {
         enemyWave = EnemyBP;
     }

@@ -7,7 +7,7 @@ using System;
 public class Enemy : MonoBehaviour
 {
 	public float speed;
-	public int health
+	public int health;
 	public int ID;
 	private Transform target;
 	private int waypointIndex;

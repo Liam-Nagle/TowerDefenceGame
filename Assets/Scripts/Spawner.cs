@@ -8,87 +8,101 @@ using System.Threading.Tasks;
 public class Spawner : MonoBehaviour
 {
 
-    Wave[] waves;
+    List<Wave> waves = new List<Wave>();
     public Transform spawnPoint;
     public Enemy Enemy1;
     public Enemy Enemy2;
 
-    private EnemyBlueprint[] enemies;
+    private List<EnemyBlueprint> enemies = new List<EnemyBlueprint>();
     private int waveIndex = 0;
-    private int Difficulty;
+    private int Difficulty = 1;
+    private float timer = 0.0f;
+    private bool spawn = true;
     public static int EnemiesAlive;
 
-    public float timeBetweenWaves = 5f;
-    public float countdown = 2f;
-
-    public Text waveCountdownText;
     public Text wavesText;
 
     private void Start()
     {
-        //HARD CODE 100 WAVES?
-        //OR PULL FROM A FILE THAT HAS 100 WAVES IN THEN CREATE A FUNCTION IN UPDATE THAT CREATES INFINITE WAVES?
+        //Adds 1 Enemy to enemies list
+        waveIndex = 1;
+        //Start defines wave 1 then update defines more waves? or again from a file SOMEHOW
     }
 
     private void Update()
     {
-        if(EnemiesAlive <= 0)
+        timer += Time.deltaTime;
+
+        if (EnemiesAlive > 0)
         {
-            //SPAWN NEXT WAVE  
+            return;
+        } else if(spawn)
+        {
+            Debug.Log(waveIndex);
+            enemies.Clear();
+            spawn = false;
+            enemies.Add(new EnemyBlueprint(Enemy1, enemiesPerWave(), 10, 1));
+            enemies.Add(new EnemyBlueprint(Enemy2, enemiesPerWave(), 10, 1));
+            StartCoroutine(SpawnWave());
+            raiseDifficulty();
+            waveIndex++;
         }
 
-//        //for (int i = 0; i < 2; i++)
-//        //{
-//        //    StartCoroutine(SpawnEnemy(enemies2[i], 10, 10));
-//        //}
+        //        if (countdown <= 0f)
+        //        {
+        //
+        //            countdown = timeBetweenWaves;
+        //            return;
+        //        }
 
-//        //for (int i = 0; i < waveIndex; i++)
-//        //{
-//        //    enemies[i].AddEnemy(Enemy1, waveIndex * 8, waveIndex * 2);
-//        //}
+        //        countdown -= Time.deltaTime;
 
+        //        countdown = Mathf.Clamp(countdown, 0f, Mathf.Infinity);
 
-//        if (EnemiesAlive > 0)
-//        {
-//            return;
-//        }
+        //        waveCountdownText.text = string.Format("{0:00.00}", countdown);
 
-//        if (countdown <= 0f)
-//        {
-//x
-//            countdown = timeBetweenWaves;
-//            return;
-//        }
-
-//        countdown -= Time.deltaTime;
-
-//        countdown = Mathf.Clamp(countdown, 0f, Mathf.Infinity);
-
-//        waveCountdownText.text = string.Format("{0:00.00}", countdown);
-
-//        //wavesText.text = (waveIndex + 1) + "/" + waves.Length;
+        //        //wavesText.text = (waveIndex + 1) + "/" + waves.Length;
 
     }
 
-    //IEnumerator SpawnWave()
-    //{
-    //    //Wave wave = waves[waveIndex];
-    //    //for (int y = 0; y < wave1Enemies.Length; y++)
-    //    //{
-    //    //    EnemyBlueprint eb = wave1Enemies[y];
-    //    //    for (int a = 0; a < wave.waveCount; a++)
-    //    //    {
-    //    //        yield return new WaitForSeconds(1f / wave.waveRate);
+    IEnumerator SpawnWave()
+    {
+        Debug.Log("Spawning Wave");
+        for (int y = 0; y < enemies.Count; y++)
+        {
+            Debug.Log("Spawning Enemy");
+            yield return new WaitUntil(() => canSpawn(enemies[y].GetSpawnTime()));
+            Debug.Log("Spawn Time");
+            for (int i = 0; i < enemies[y].GetCount(); i++)
+            {
+                Debug.Log(timer);
+                SpawnEnemy(enemies[y].GetEnemy());
+                yield return new WaitForSeconds(1f / enemies[y].GetRate());
+            }
 
-    //    //        for (int i = 0; i < eb.enemyCount; i++)
-    //    //        {
-    //    //            SpawnEnemy(eb.enemy);
-    //    //            yield return new WaitForSeconds(1f / eb.enemyRate);
-    //    //        }
-    //    //    }
-    //    //}
-    //    //waveIndex++;
-    //}
+        }
+        timer = 0.0f;
+        spawn = true;
+    }
+
+    void nextWave()
+    {
+        if(EnemiesAlive <= 0)
+        {
+            waveIndex++;
+        }
+    }
+
+    private bool canSpawn(float spawnTime)
+    {
+        if(spawnTime <= timer)
+        {
+            return true;
+        } else
+        {
+            return false;
+        }
+    }
 
     void SpawnEnemy(Enemy enemy)
     {
