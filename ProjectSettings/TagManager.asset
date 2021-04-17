@@ -43,3 +43,21 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Background
+    uniqueID: 314584323
+    locked: 0
+  - name: Placeable
+    uniqueID: 3609082795
+    locked: 0
+  - name: Collision Map
+    uniqueID: 3455996585
+    locked: 0
+  - name: Towers
+    uniqueID: 1764092063
+    locked: 0
+  - name: Enemies
+    uniqueID: 1709705229
+    locked: 0
+  - name: UI
+    uniqueID: 3888872731
+    locked: 0
