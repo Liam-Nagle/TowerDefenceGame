@@ -11,10 +11,16 @@ public class Enemy : MonoBehaviour
 	public int ID;
 	private Transform target;
 	private int waypointIndex;
+	private Animator animation;
 
 	public void Start()
 	{
 		target = Waypoints.waypoints[0];
+
+		// Gets Animator Component Off Enemy and Sets the Speed to Enemy Speed.
+		animation = GetComponent<Animator>();
+		animation.speed = speed;
+
 	}
 
 

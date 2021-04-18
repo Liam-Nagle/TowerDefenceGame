@@ -48,6 +48,7 @@ MonoBehaviour:
   speed: 2
   health: 0
   ID: 0
+  animation: {fileID: 0}
 --- !u!212 &8020986657126636746
 SpriteRenderer:
   m_ObjectHideFlags: 0
