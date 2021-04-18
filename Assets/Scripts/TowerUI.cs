@@ -72,6 +72,7 @@ public class TowerUI : MonoBehaviour
 	}
 	public void SelectTower(int id)
 	{
+		DeselectTowers();
 		//Set the spawnID
 		spawnID = id;
 		//Highlight the tower
