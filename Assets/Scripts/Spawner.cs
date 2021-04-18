@@ -41,8 +41,8 @@ public class Spawner : MonoBehaviour
             Debug.Log(waveIndex);
             enemies.Clear();
             spawn = false;
-            enemies.Add(new EnemyBlueprint(Enemy1, enemiesPerWave(), 10, 1));
-            enemies.Add(new EnemyBlueprint(Enemy2, enemiesPerWave(), 10, 1));
+            enemies.Add(new EnemyBlueprint(Enemy1, enemiesPerWave(), 1, 1));
+            enemies.Add(new EnemyBlueprint(Enemy2, enemiesPerWave(), 1, 1));
             StartCoroutine(SpawnWave());
             raiseDifficulty();
             waveIndex++;
