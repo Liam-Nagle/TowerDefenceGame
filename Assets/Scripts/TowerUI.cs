@@ -62,21 +62,32 @@ public class TowerUI : MonoBehaviour
 				Placeable.SetColliderType(cellPosDefault, Tile.ColliderType.None);
 			}
 		}
+
+		//Detect when mouse is click (first touch clicked)
+		if (Input.GetMouseButtonDown(1))
+		{
+			DeselectTowers();
+		}
 	}
 
 	void SpawnTower(Vector3 position)
 	{
 		GameObject tower = Instantiate(towersPrefabs[spawnID], spawnTowerRoot);
 		tower.transform.position = position;
-		DeselectTowers();
 	}
 	public void SelectTower(int id)
 	{
-		DeselectTowers();
-		//Set the spawnID
-		spawnID = id;
-		//Highlight the tower
-		towersUI[spawnID].color = Color.white;
+		if (spawnID == id)
+        {
+			DeselectTowers();
+        } else
+        {
+			DeselectTowers();
+			//Set the spawnID
+			spawnID = id;
+			//Highlight the tower
+			towersUI[spawnID].color = Color.white;
+		}
 	}
 
 	public void DeselectTowers()
