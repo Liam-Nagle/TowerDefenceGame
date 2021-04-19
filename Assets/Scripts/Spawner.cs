@@ -65,6 +65,14 @@ public class Spawner : MonoBehaviour
 
     }
 
+    //IEnumerator SpawnWave2(List<Wave> waves)
+    //{
+    //    for(int i = 0; i < waveIndex; i++)
+    //    {
+    //        waves[];
+    //    }
+    //}
+
     IEnumerator SpawnWave()
     {
         Debug.Log("Spawning Wave");
