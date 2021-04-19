@@ -17,7 +17,7 @@ public class TowerUI : MonoBehaviour
 	//Spawn Tilemap
 	public Tilemap Placeable;
 
-    private void Start()
+	private void Start()
     {
 		DeselectTowers();
 	}
