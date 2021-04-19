@@ -42,11 +42,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 146220565650487066}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 023e3bc46e0b8fc498cae0c52a7e4466, type: 3}
+  m_Script: {fileID: 11500000, guid: 9098d1a5b24de8f45b10fb6ca974dcc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: 10
-  towerDamage: 5
+  range: 5
+  towerDamage: 0
 --- !u!212 &2232970723599201064
 SpriteRenderer:
   m_ObjectHideFlags: 0
