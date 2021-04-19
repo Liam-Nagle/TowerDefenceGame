@@ -9,12 +9,19 @@ public class Enemy : MonoBehaviour
 	public float speed;
 	public int health;
 	public int ID;
+	public int damage;
 	private Transform target;
 	private int waypointIndex;
+	private Animator animate;
 
 	public void Start()
 	{
 		target = Waypoints.waypoints[0];
+
+		// Gets Animator Component Off Enemy and Sets the Speed to Enemy Speed.
+		animate = GetComponent<Animator>();
+		animate.speed = speed;
+
 	}
 
 
