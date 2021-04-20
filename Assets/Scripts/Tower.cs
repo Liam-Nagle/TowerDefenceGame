@@ -13,19 +13,19 @@ public class Tower : MonoBehaviour
     public int towerDamage;
     //Get range sprite
     private SpriteRenderer _rangeIndicator;
-    private Vector3 _towerPosition;
+    private List<Vector3> _towerPosition;
     private Tilemap _placeable;
     private bool towerSelected;
 
 
     // Start is called before the first frame update
     void Start()
-    {
-        _towerPosition = GetComponent<Transform>().position;
+    {   
         _rangeIndicator = transform.GetChild(0).GetComponent<SpriteRenderer>();
         _rangeIndicator.transform.localScale = new Vector2(range, range);
         _rangeIndicator.enabled = false;
         _placeable = GameObject.Find("Grid/Placeable").GetComponent<Tilemap>();
+        _towerPosition = UI.GetTowerPosistions();
     }
 
     // Update is called once per frame  
@@ -41,23 +41,16 @@ public class Tower : MonoBehaviour
             //get the center position of the cell
             var cellPosCentered = _placeable.GetCellCenterWorld(cellPosDefault);
 
-            if (towerSelected == false)
-            {
-                if (cellPosCentered == _towerPosition)
-                {
-                    OpenTowerUpgradeUI();
-                    towerSelected = true;
-                }
 
-                //Tower Position Array that holds ALL tower positions XYZ. Then in HERE. Check if the tile your clicking on IS listed in that array (for loop) then OPEN THE MENU
-                //if it isn't then it can do something else.
-
-            } else if ((towerSelected == true) && (cellPosCentered == _towerPosition))
+            if (_towerPosition.Contains(cellPosCentered))
             {
-                return;
-            } 
+                OpenTowerUpgradeUI();
+            }
+            else
+            {
+                CloseTowerUpgradeUI();
+            }
         }
-
         //    if (Input.GetMouseButtonDown(0))
         //{
         //    //get the world space position of the mouse

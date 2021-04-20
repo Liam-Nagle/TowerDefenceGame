@@ -18,6 +18,7 @@ public class UI : MonoBehaviour
 	public Tilemap Placeable;
 	private static GameObject _towersUI;
 	private static GameObject _upgradesUI;
+	private static List<Vector3> _towerPositions;
 
 	private void Start()
 	{
@@ -79,6 +80,7 @@ public class UI : MonoBehaviour
 	{
 		Tower tower = Instantiate(towersPrefabs[spawnID], spawnTowerRoot);
 		tower.transform.position = position;
+		_towerPositions.Add(position);
 	}
 	public void SelectTower(int id)
 	{
@@ -105,6 +107,11 @@ public class UI : MonoBehaviour
 		}
 	}
 
+	public static List<Vector3> GetTowerPosistions()
+    {
+		return _towerPositions;
+    }
+
 	public static void SwitchMenu()
 	{
 		if (_towersUI.activeSelf == true)
@@ -125,9 +132,4 @@ public class UI : MonoBehaviour
 			return;
 		}
 	}
-
-	public static void OpenUpgradeUI(Vector3 towerPos)
-    {
-
-    }
 }
