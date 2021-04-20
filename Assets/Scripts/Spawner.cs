@@ -38,11 +38,10 @@ public class Spawner : MonoBehaviour
             return;
         } else if(spawn)
         {
-            Debug.Log(waveIndex);
             enemies.Clear();
             spawn = false;
-            enemies.Add(new EnemyBlueprint(Enemy1, enemiesPerWave(), 10, 1));
-            enemies.Add(new EnemyBlueprint(Enemy2, enemiesPerWave(), 10, 1));
+            enemies.Add(new EnemyBlueprint(Enemy1, enemiesPerWave(), 1, 1));
+            enemies.Add(new EnemyBlueprint(Enemy2, enemiesPerWave(), 1, 1));
             StartCoroutine(SpawnWave());
             raiseDifficulty();
             waveIndex++;
@@ -65,17 +64,21 @@ public class Spawner : MonoBehaviour
 
     }
 
+    //IEnumerator SpawnWave2(List<Wave> waves)
+    //{
+    //    for(int i = 0; i < waveIndex; i++)
+    //    {
+    //        waves[];
+    //    }
+    //}
+
     IEnumerator SpawnWave()
     {
-        Debug.Log("Spawning Wave");
         for (int y = 0; y < enemies.Count; y++)
         {
-            Debug.Log("Spawning Enemy");
             yield return new WaitUntil(() => canSpawn(enemies[y].GetSpawnTime()));
-            Debug.Log("Spawn Time");
             for (int i = 0; i < enemies[y].GetCount(); i++)
             {
-                Debug.Log(timer);
                 SpawnEnemy(enemies[y].GetEnemy());
                 yield return new WaitForSeconds(1f / enemies[y].GetRate());
             }
