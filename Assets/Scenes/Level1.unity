@@ -389,8 +389,8 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1199747836}
-          m_TargetAssemblyTypeName: TowerUI, Assembly-CSharp
+        - m_Target: {fileID: 1199747837}
+          m_TargetAssemblyTypeName: UI, Assembly-CSharp
           m_MethodName: SelectTower
           m_Mode: 3
           m_Arguments:
@@ -808,8 +808,8 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1199747836}
-          m_TargetAssemblyTypeName: TowerUI, Assembly-CSharp
+        - m_Target: {fileID: 1199747837}
+          m_TargetAssemblyTypeName: UI, Assembly-CSharp
           m_MethodName: SelectTower
           m_Mode: 3
           m_Arguments:
@@ -1114,6 +1114,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1199747835}
   - component: {fileID: 1199747834}
+  - component: {fileID: 1199747837}
   - component: {fileID: 1199747836}
   m_Layer: 0
   m_Name: GameMaster
@@ -1161,16 +1162,31 @@ MonoBehaviour:
   m_GameObject: {fileID: 1199747833}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7adcf2f4957a14fb21dd11d1a6145e, type: 3}
+  m_Script: {fileID: 11500000, guid: 0a4292e644aec694a8cfdee0810cfefb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   towersPrefabs:
   - {fileID: -3873665710418846003, guid: a840ea9e9a15c3e41910cdd415f417d5, type: 3}
   - {fileID: -444997219414943414, guid: 4b53d1c4f3a6d6a49a8f6962be191b1b, type: 3}
   spawnTowerRoot: {fileID: 1942723151}
-  towers:
+  Placeable: {fileID: 1757614626}
+--- !u!114 &1199747837
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1199747833}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7adcf2f4957a14fb21dd11d1a6145e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  towerImage:
   - {fileID: 385471674}
   - {fileID: 694585952}
+  _towersUI: {fileID: 506747009}
+  _upgradesUI: {fileID: 355819229}
   Placeable: {fileID: 1757614626}
 --- !u!1 &1201070952
 GameObject:

@@ -7,54 +7,30 @@ using UnityEngine.UI;
 
 public class UI : MonoBehaviour
 {
-	//list of towers(prefabs) that will instantiate
-	public List<Tower> towersPrefabs;
-	//Transform of the spawning towers(Root Object)
-	public Transform spawnTowerRoot;
 	//list of towers (UI)
-	public List<Image> towers;
-	//id of tower to spawn	
-	int spawnID = -1;
-	//Spawn Tilemap
+	public List<Image> towerImage;
+	private int spawnID = -1;
+	public GameObject _towersUI;
+	public GameObject _upgradesUI;
+	private bool _towerSelected;
+	private TowerSpawning towerSpawning;
 	public Tilemap Placeable;
-	private static GameObject _towersUI;
-	private static GameObject _upgradesUI;
-	private static List<Vector3> _towerPositions = new List<Vector3>();
-	private static bool _towerSelected;
+	private List<Tower> towers = new List<Tower>();
 
-	public object GameManager { get; private set; }
-
-    private void Start()
+	private void Start()
 	{
 		DeselectTowers();
-		_towersUI = GameObject.Find("UI/Right Menu/Towers");
-		_upgradesUI = GameObject.Find("UI/Right Menu/Upgrades");
 		_upgradesUI.SetActive(false);
 		_towersUI.SetActive(true);
+		towerSpawning = GetComponent<TowerSpawning>();
 	}
 	void Update()
 	{
 		if (spawnID != -1)
 		{
-			DetectSpawnPoint();
+			towerSpawning.DetectSpawnPoint();
 		}
-	}
 
-	bool CanSpawn()
-	{
-		if (spawnID == -1)
-		{
-			return false;
-		}
-		else
-		{
-			return true;
-		}
-	}
-
-	void DetectSpawnPoint()
-	{
-		//Detect when mouse is click (first touch clicked)
 		if (Input.GetMouseButtonDown(0))
 		{
 			//get the world space position of the mouse
@@ -63,30 +39,39 @@ public class UI : MonoBehaviour
 			var cellPosDefault = Placeable.WorldToCell(mousePos);
 			//get the center position of the cell
 			var cellPosCentered = Placeable.GetCellCenterWorld(cellPosDefault);
-			//check if the cell is eligible (collider)
-			if (Placeable.GetColliderType(cellPosDefault) == Tile.ColliderType.Sprite)
-			{
-				//spawn the tower
-				SpawnTower(cellPosCentered);
-				//Disable the collider
-				Placeable.SetColliderType(cellPosDefault, Tile.ColliderType.None);
-			}
-		}
+            //check if the cell is eligible (collider)
 
-		//Detect when mouse is click (first touch clicked)
-		if (Input.GetMouseButtonDown(1))
+            for (int i = 0; i < towers.Count; i++)
+            {
+				towers[i].Deselect();
+			}
+			//EventSystem.current.currentSelectedGameObject
+
+            Debug.Log("Mouse Clicked");
+            foreach (var tower in towers)
+            {
+                if (cellPosCentered == tower.GetTowerPosition())
+                {
+                    Debug.Log("Clicked On Tower");
+                    OpenUpgradeUI();
+                    tower.Select();
+                    break;
+                }
+                else
+                {
+                    Debug.Log("Not Clicked On Tower");
+                    OpenTowerUI();
+                }
+            }
+
+        }
+
+        if (Input.GetMouseButtonDown(1))
 		{
 			DeselectTowers();
 		}
 	}
-
-	void SpawnTower(Vector3 position)
-	{
-		Tower tower = Instantiate(towersPrefabs[spawnID], spawnTowerRoot);
-		tower.transform.position = position;
-		_towerPositions.Add(position);
-	}
-	private void SelectTower(int id)
+	public void SelectTower(int id)
 	{
 		if (spawnID == id)
 		{
@@ -99,38 +84,52 @@ public class UI : MonoBehaviour
 			//Set the spawnID
 			spawnID = id;
 			//Highlight the tower
-			towers[spawnID].color = Color.white;
+			towerImage[spawnID].color = Color.white;
 		}
 	}
 
 	public void DeselectTowers()
 	{
+		OpenTowerUI();
 		spawnID = -1;
 		_towerSelected = false;
-		foreach (var t in towers)
+		foreach (var t in towerImage)
 		{
 			t.color = new Color(0.5f, 0.5f, 0.5f);
 		}
 	}
 
-	public static List<Vector3> GetTowerPosistions()
-	{
-		return _towerPositions;
-	}
-
-	public static bool GetIfTowerSelected()
+	public int GetSpawnID()
     {
-		return _towerSelected;
+		return spawnID;
     }
 
-	public static void OpenUpgradeUI()
+	public void OpenUpgradeUI()
     {
-		_towersUI.SetActive(false);
-		_upgradesUI.SetActive(true);
+		if(_towersUI.activeSelf == true)
+        {
+			return;
+        } else
+        {
+			_towersUI.SetActive(false);
+			_upgradesUI.SetActive(true);
+		}
     }
-	public static void OpenTowerUI()
+	public void OpenTowerUI()
 	{
-		_towersUI.SetActive(true);
-		_upgradesUI.SetActive(false);
+		if (_towersUI.activeSelf == true)
+		{
+			return;
+		}
+		else
+        {
+			_towersUI.SetActive(true);
+			_upgradesUI.SetActive(false);
+		}
 	}
+
+	public void SetTowers(Tower tower)
+    {
+		towers.Add(tower);
+    }
 }
