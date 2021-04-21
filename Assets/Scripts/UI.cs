@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.Tilemaps;
 using UnityEngine.UI;
 
@@ -18,9 +19,12 @@ public class UI : MonoBehaviour
 	public Tilemap Placeable;
 	private static GameObject _towersUI;
 	private static GameObject _upgradesUI;
-	private static List<Vector3> _towerPositions;
+	private static List<Vector3> _towerPositions = new List<Vector3>();
+	private static bool _towerSelected;
 
-	private void Start()
+	public object GameManager { get; private set; }
+
+    private void Start()
 	{
 		DeselectTowers();
 		_towersUI = GameObject.Find("UI/Right Menu/Towers");
@@ -82,7 +86,7 @@ public class UI : MonoBehaviour
 		tower.transform.position = position;
 		_towerPositions.Add(position);
 	}
-	public void SelectTower(int id)
+	private void SelectTower(int id)
 	{
 		if (spawnID == id)
 		{
@@ -91,6 +95,7 @@ public class UI : MonoBehaviour
 		else
 		{
 			DeselectTowers();
+			_towerSelected = true;
 			//Set the spawnID
 			spawnID = id;
 			//Highlight the tower
@@ -101,6 +106,7 @@ public class UI : MonoBehaviour
 	public void DeselectTowers()
 	{
 		spawnID = -1;
+		_towerSelected = false;
 		foreach (var t in towers)
 		{
 			t.color = new Color(0.5f, 0.5f, 0.5f);
@@ -108,28 +114,23 @@ public class UI : MonoBehaviour
 	}
 
 	public static List<Vector3> GetTowerPosistions()
-    {
+	{
 		return _towerPositions;
+	}
+
+	public static bool GetIfTowerSelected()
+    {
+		return _towerSelected;
     }
 
-	public static void SwitchMenu()
+	public static void OpenUpgradeUI()
+    {
+		_towersUI.SetActive(false);
+		_upgradesUI.SetActive(true);
+    }
+	public static void OpenTowerUI()
 	{
-		if (_towersUI.activeSelf == true)
-		{
-
-			_towersUI.SetActive(false);
-			Debug.Log("TowerUI Off");
-			_upgradesUI.SetActive(true);
-		}
-		else if (_upgradesUI.activeSelf == true)
-		{
-			_upgradesUI.SetActive(false);
-			Debug.Log("UpgradeUI Off");
-			_towersUI.SetActive(true);
-		}
-		else
-		{
-			return;
-		}
+		_towersUI.SetActive(true);
+		_upgradesUI.SetActive(false);
 	}
 }
