@@ -23,6 +23,7 @@ public class Tower : MonoBehaviour
     void Start()
     {
         _rangeSpriteRenderer = transform.GetChild(0).GetComponent<SpriteRenderer>();
+        _rangeSpriteRenderer.transform.localScale = new Vector3(range, range);
     }
 
     // Update is called once per frame  

@@ -52,14 +52,12 @@ public class UI : MonoBehaviour
             {
                 if (cellPosCentered == tower.GetTowerPosition())
                 {
-                    Debug.Log("Clicked On Tower");
                     OpenUpgradeUI();
                     tower.Select();
                     break;
                 }
                 else
                 {
-                    Debug.Log("Not Clicked On Tower");
                     OpenTowerUI();
                 }
             }
@@ -106,26 +104,14 @@ public class UI : MonoBehaviour
 
 	public void OpenUpgradeUI()
     {
-		if(_towersUI.activeSelf == true)
-        {
-			return;
-        } else
-        {
-			_towersUI.SetActive(false);
-			_upgradesUI.SetActive(true);
-		}
+		_towersUI.SetActive(false);
+		_upgradesUI.SetActive(true);
+
     }
 	public void OpenTowerUI()
 	{
-		if (_towersUI.activeSelf == true)
-		{
-			return;
-		}
-		else
-        {
-			_towersUI.SetActive(true);
-			_upgradesUI.SetActive(false);
-		}
+		_towersUI.SetActive(true);
+		_upgradesUI.SetActive(false);
 	}
 
 	public void SetTowers(Tower tower)
