@@ -40,33 +40,42 @@ public class UI : MonoBehaviour
 			//get the center position of the cell
 			var cellPosCentered = Placeable.GetCellCenterWorld(cellPosDefault);
             //check if the cell is eligible (collider)
-
-            for (int i = 0; i < towers.Count; i++)
+			
+			
+			if(_towerSelected == true)
             {
-				towers[i].Deselect();
+				return;
+            } else
+            {
+				for (int i = 0; i < towers.Count; i++)
+				{
+					towers[i].Deselect();
+				}
+				//EventSystem.current.currentSelectedGameObject
+				foreach (var tower in towers)
+				{
+					if (cellPosCentered == tower.GetTowerPosition())
+					{
+						OpenUpgradeUI();
+						tower.Select();
+						break;
+					}
+					else
+					{
+						OpenTowerUI();
+					}
+				}
 			}
-			//EventSystem.current.currentSelectedGameObject
-
-            Debug.Log("Mouse Clicked");
-            foreach (var tower in towers)
-            {
-                if (cellPosCentered == tower.GetTowerPosition())
-                {
-                    OpenUpgradeUI();
-                    tower.Select();
-                    break;
-                }
-                else
-                {
-                    OpenTowerUI();
-                }
-            }
-
         }
 
         if (Input.GetMouseButtonDown(1))
 		{
 			DeselectTowers();
+			OpenTowerUI();
+			for (int i = 0; i < towers.Count; i++)
+			{
+				towers[i].Deselect();
+			}
 		}
 	}
 	public void SelectTower(int id)
