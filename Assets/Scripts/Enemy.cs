@@ -34,11 +34,6 @@ public class Enemy : MonoBehaviour
 		{
 			GetNextWaypoint();
 		}
-
-		if(health <= 0)
-        {
-			Die();
-        }
 	}
 
 	public int GetID()
@@ -60,13 +55,7 @@ public class Enemy : MonoBehaviour
 
 	void Die()
     {
-		Destroy(gameObject);
-		Spawner.EnemiesAlive--;
-	}
 
-	public void TakeDamage(int damage)
-    {
-		health = health - damage;
     }
 }
 

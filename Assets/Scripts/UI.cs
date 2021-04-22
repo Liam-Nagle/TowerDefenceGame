@@ -46,6 +46,8 @@ public class UI : MonoBehaviour
 				towers[i].Deselect();
 			}
 			//EventSystem.current.currentSelectedGameObject
+
+            Debug.Log("Mouse Clicked");
             foreach (var tower in towers)
             {
                 if (cellPosCentered == tower.GetTowerPosition())
@@ -65,7 +67,6 @@ public class UI : MonoBehaviour
         if (Input.GetMouseButtonDown(1))
 		{
 			DeselectTowers();
-			OpenTowerUI();
 		}
 	}
 	public void SelectTower(int id)
