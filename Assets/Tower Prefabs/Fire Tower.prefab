@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9098d1a5b24de8f45b10fb6ca974dcc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: 5
+  range: 2.5
   towerDamage: 10
   fireRate: 1
   useLaser: 0

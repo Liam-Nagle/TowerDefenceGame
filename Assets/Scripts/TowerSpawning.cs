@@ -46,8 +46,6 @@ public class TowerSpawning : MonoBehaviour
                 //Disable the collider
                 Placeable.SetColliderType(cellPosDefault, Tile.ColliderType.None);
             }
-
-            
         }
 	}
 

@@ -5,7 +5,7 @@ public class Tower : MonoBehaviour
 
     [Header("Attributes")]
     //Maximum attack range
-    public int range;
+    public float range;
     //Damage to enemy on collision
     public int towerDamage;
     public float fireRate = 1f;
@@ -28,12 +28,12 @@ public class Tower : MonoBehaviour
     public GameObject bulletPrefab;
     public Transform firePoint;
 
-
+    
     // Start is called before the first frame update
     void Start()
     {
         _rangeSpriteRenderer = transform.GetChild(0).GetComponent<SpriteRenderer>();
-        _rangeSpriteRenderer.transform.localScale = new Vector3(range, range);
+        _rangeSpriteRenderer.transform.localScale = new Vector2(range*2, range*2);
         InvokeRepeating("UpdateTarget", 0f, 0.5f);
     }
 
@@ -75,6 +75,11 @@ public class Tower : MonoBehaviour
             fireCountdown = 1f / fireRate;
         }
         fireCountdown -= Time.deltaTime;
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.DrawWireSphere(transform.position, range);
     }
 
     void LockOnTarget()
