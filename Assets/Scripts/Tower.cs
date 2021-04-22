@@ -1,8 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Tilemaps;
-using UnityEngine.UI;
 
 public class Tower : MonoBehaviour
 {
@@ -11,81 +7,51 @@ public class Tower : MonoBehaviour
     public int range;
     //Damage to enemy on collision
     public int towerDamage;
+    private Vector3 _towerPosition;
     //Get range sprite
-    private SpriteRenderer _rangeIndicator;
-    private List<Vector3> _towerPosition;
-    private Tilemap _placeable;
-    private bool towerSelected;
-
+    private SpriteRenderer _rangeSpriteRenderer;
+    private int _towerID;
 
     // Start is called before the first frame update
     void Start()
-    {   
-        _rangeIndicator = transform.GetChild(0).GetComponent<SpriteRenderer>();
-        _rangeIndicator.transform.localScale = new Vector2(range, range);
-        _rangeIndicator.enabled = false;
-        _placeable = GameObject.Find("Grid/Placeable").GetComponent<Tilemap>();
-        _towerPosition = UI.GetTowerPosistions();
+    {
+        _rangeSpriteRenderer = transform.GetChild(0).GetComponent<SpriteRenderer>();
+        _rangeSpriteRenderer.transform.localScale = new Vector3(range, range);
     }
 
     // Update is called once per frame  
     void Update()
     {
 
-        if (Input.GetMouseButtonDown(0))
-        {
-            //get the world space position of the mouse
-            var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            //get the position of the cell in the tilemap
-            var cellPosDefault = _placeable.WorldToCell(mousePos);
-            //get the center position of the cell
-            var cellPosCentered = _placeable.GetCellCenterWorld(cellPosDefault);
-
-
-            if (_towerPosition.Contains(cellPosCentered))
-            {
-                OpenTowerUpgradeUI();
-            }
-            else
-            {
-                CloseTowerUpgradeUI();
-            }
-        }
-        //    if (Input.GetMouseButtonDown(0))
-        //{
-        //    //get the world space position of the mouse
-        //    var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        //    //get the position of the cell in the tilemap
-        //    var cellPosDefault = _placeable.WorldToCell(mousePos);
-        //    //get the center position of the cell
-        //    var cellPosCentered = _placeable.GetCellCenterWorld(cellPosDefault);
-
-        //    if(cellPosCentered == _towerPosition)
-        //    {
-        //        OpenTowerUpgradeUI();
-        //    } else
-        //    {
-        //        CloseTowerUpgradeUI();
-        //    }
-        //}
-
-        //if (Input.GetMouseButtonDown(1))
-        //{
-        //    CloseTowerUpgradeUI();
-        //}
+    }
+    public void Select()
+    {
+        _rangeSpriteRenderer.enabled = true;
     }
 
-    void OpenTowerUpgradeUI()
+    public void Deselect()
     {
-        _rangeIndicator.enabled = true;
-        UI.SwitchMenu();
+        _rangeSpriteRenderer.enabled = false;
     }
 
-    void CloseTowerUpgradeUI()
+    public int GetTowerID()
     {
+        return _towerID;
+    }
 
-        _rangeIndicator.enabled = false;
-        UI.SwitchMenu();
+    public void SetTowerID(int id)
+    {
+        _towerID = id;
+    }
+
+    public Vector3 GetTowerPosition()
+    {
+        return _towerPosition;
+    }
+
+    public void SetTowerPosition(Vector3 towerPosition)
+    {
+        _towerPosition = towerPosition;
     }
 
 }
