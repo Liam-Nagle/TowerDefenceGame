@@ -33,8 +33,8 @@ public class Tower : MonoBehaviour
     void Start()
     {
         _rangeSpriteRenderer = transform.GetChild(0).GetComponent<SpriteRenderer>();
-        _rangeSpriteRenderer.transform.localScale = new Vector2(range*2, range*2);
-        InvokeRepeating("UpdateTarget", 0f, 0.5f);
+        _rangeSpriteRenderer.transform.localScale = new Vector2(range, range);
+        InvokeRepeating("UpdateTarget", 0f, 0.1f);
     }
 
 
@@ -69,7 +69,12 @@ public class Tower : MonoBehaviour
     // Update is called once per frame  
     void Update()
     {
-        if(fireCountdown <= 0f)
+        if(_target == null)
+        {
+            return;
+        }
+
+        if(fireCountdown <= 0f && _target != null)
         {
             Shoot();
             fireCountdown = 1f / fireRate;
