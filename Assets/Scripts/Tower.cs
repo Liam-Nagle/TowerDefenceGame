@@ -24,6 +24,7 @@ public class Tower : MonoBehaviour
     private int _towerID;
     private Transform _target;
     private Enemy _targetEnemy;
+    private Vector3 _targetDirection;
 
     public GameObject bulletPrefab;
     public Transform firePoint;
@@ -57,6 +58,7 @@ public class Tower : MonoBehaviour
             {
                 _target = nearestEnemy.transform;
                 _targetEnemy = nearestEnemy.GetComponent<Enemy>();
+                transform.rotation = Quaternion.FromToRotation(this.transform.forward, _target.position);
             }
             else
             {
@@ -64,6 +66,7 @@ public class Tower : MonoBehaviour
             }
         }
     }
+
 
 
     // Update is called once per frame  
@@ -94,7 +97,7 @@ public class Tower : MonoBehaviour
 
     void Shoot()
     {
-        GameObject bulletGO = (GameObject)Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+        GameObject bulletGO = (GameObject)Instantiate(bulletPrefab, firePoint.position, firePoint.rotation, GetComponent<Transform>());
         Bullet bullet = bulletGO.GetComponent<Bullet>();
         bullet.SetEnemy(_targetEnemy);
         bullet.SetTowerDamage(towerDamage);
