@@ -58,7 +58,7 @@ public class Tower : MonoBehaviour
             {
                 _target = nearestEnemy.transform;
                 _targetEnemy = nearestEnemy.GetComponent<Enemy>();
-                transform.rotation = Quaternion.FromToRotation(this.transform.forward, _target.position);
+//Insert code to rotate sprite based on nearest enemy targetted
             }
             else
             {
