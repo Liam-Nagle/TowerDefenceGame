@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: -3873665710418846003}
   - component: {fileID: 2232970723599201064}
   m_Layer: 7
-  m_Name: Fire Tower
+  m_Name: Gatling Gun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

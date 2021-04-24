@@ -9,7 +9,8 @@ public class Bullet : MonoBehaviour
     private Enemy targetEnemy;
     private int towerDamage;
 
-    public float speed = 70f;
+    //speed of the projectile
+    public float speed;
 
     public void SetTarget(Transform _target)
     {
