@@ -19,8 +19,8 @@ public class Enemy : MonoBehaviour
 		target = Waypoints.waypoints[0];
 
 		// Gets Animator Component Off Enemy and Sets the Speed to Enemy Speed.
-		animate = GetComponent<Animator>();
-		animate.speed = speed;
+		//animate = GetComponent<Animator>();
+		//animate.speed = speed;
 
 	}
 
@@ -67,6 +67,6 @@ public class Enemy : MonoBehaviour
 	public void TakeDamage(int damage)
     {
 		health = health - damage;
-    }
+	}
 }
 
