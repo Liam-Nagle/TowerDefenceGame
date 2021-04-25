@@ -10,6 +10,7 @@ public class TowerSpawning : MonoBehaviour
     public List<Tower> towersPrefabs;
     //Transform of the spawning towers(Root Object)
     public Transform spawnTowerRoot;
+    public Transform _spawnedProjectiles;
     //Spawn Tilemap
     public Tilemap Placeable;
     private UI ui;
@@ -56,6 +57,7 @@ public class TowerSpawning : MonoBehaviour
 		tower.transform.position = position;
 		tower.SetTowerID(_towerID);
         tower.SetTowerPosition(position);
+        tower.SetSpawnedProjectiles(_spawnedProjectiles);
         ui.SetTowers(tower);
 	}
 }
