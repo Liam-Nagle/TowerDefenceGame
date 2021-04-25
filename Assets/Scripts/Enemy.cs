@@ -29,6 +29,7 @@ public class Enemy : MonoBehaviour
 	{
 		Vector2 dir = target.position - transform.position;
 		transform.Translate(dir.normalized * speed * Time.deltaTime, Space.World);
+//Insert code to rotate enemy to face next waypoint
 
 		if (Vector2.Distance(transform.position, target.position) < 0.01f)
 		{

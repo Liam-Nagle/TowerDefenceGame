@@ -53,6 +53,9 @@ TagManager:
   - name: Collision Map
     uniqueID: 3455996585
     locked: 0
+  - name: Projectiles
+    uniqueID: 2215107451
+    locked: 0
   - name: Towers
     uniqueID: 1764092063
     locked: 0
