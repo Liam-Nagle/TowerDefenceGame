@@ -29,7 +29,12 @@ public class Enemy : MonoBehaviour
 	{
 		Vector2 dir = target.position - transform.position;
 		transform.Translate(dir.normalized * speed * Time.deltaTime, Space.World);
-//Insert code to rotate enemy to face next waypoint
+
+		var rotationTarget = Waypoints.waypoints[waypointIndex];
+		Quaternion rotation = Quaternion.LookRotation(rotationTarget.position - transform.position, transform.TransformDirection(Vector3.back));
+		rotation.x = 0;
+		rotation.y = 0;
+		transform.rotation = rotation;
 
 		if (Vector2.Distance(transform.position, target.position) < 0.01f)
 		{
