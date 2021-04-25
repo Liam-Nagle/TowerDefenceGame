@@ -1,4 +1,6 @@
 using UnityEngine;
+using System.Collections;
+
 
 public class Tower : MonoBehaviour
 {
@@ -28,7 +30,6 @@ public class Tower : MonoBehaviour
     public GameObject bulletPrefab;
     public Transform[] firePoint;
     private int firePointIndex;
-
     
     // Start is called before the first frame update
     void Start()
@@ -107,7 +108,7 @@ public class Tower : MonoBehaviour
 
         if (firePointIndex < firePoint.Length)
         {
-            GameObject bulletGO = (GameObject)Instantiate(bulletPrefab, firePoint[firePointIndex].position, firePoint[firePointIndex].rotation, bulletPrefab.GetComponent<Transform>());
+            GameObject bulletGO = (GameObject)Instantiate(bulletPrefab, firePoint[firePointIndex].position, firePoint[firePointIndex].rotation);
             Bullet bullet = bulletGO.GetComponent<Bullet>();
             bullet.SetEnemy(_targetEnemy);
             bullet.SetTowerDamage(towerDamage);
@@ -150,5 +151,4 @@ public class Tower : MonoBehaviour
     {
         _towerPosition = towerPosition;
     }
-
 }
