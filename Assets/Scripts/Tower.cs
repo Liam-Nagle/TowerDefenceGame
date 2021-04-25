@@ -26,7 +26,8 @@ public class Tower : MonoBehaviour
     private Enemy _targetEnemy;
 
     public GameObject bulletPrefab;
-    public Transform firePoint;
+    public Transform[] firePoint;
+    private int firePointIndex;
 
     
     // Start is called before the first frame update
@@ -61,7 +62,6 @@ public class Tower : MonoBehaviour
                 rotation.x = 0;
                 rotation.y = 0;
                 transform.rotation = rotation;
-
             }
             else
             {
@@ -69,6 +69,7 @@ public class Tower : MonoBehaviour
             }
         }
     }
+
 
 
     // Update is called once per frame  
@@ -81,8 +82,8 @@ public class Tower : MonoBehaviour
 
         if(fireCountdown <= 0f && _target != null)
         {
-            Shoot();
             fireCountdown = 1f / fireRate;
+            Shoot();
         }
         fireCountdown -= Time.deltaTime;
     }
@@ -99,14 +100,23 @@ public class Tower : MonoBehaviour
 
     void Shoot()
     {
-        GameObject bulletGO = (GameObject)Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
-        Bullet bullet = bulletGO.GetComponent<Bullet>();
-        bullet.SetEnemy(_targetEnemy);
-        bullet.SetTowerDamage(towerDamage);
-
-        if (bullet != null)
+        if (firePointIndex >= firePoint.Length)
         {
-            bullet.SetTarget(_target);
+            firePointIndex = 0;
+        }
+
+        if (firePointIndex < firePoint.Length)
+        {
+            GameObject bulletGO = (GameObject)Instantiate(bulletPrefab, firePoint[firePointIndex].position, firePoint[firePointIndex].rotation, GetComponent<Transform>());
+            Bullet bullet = bulletGO.GetComponent<Bullet>();
+            bullet.SetEnemy(_targetEnemy);
+            bullet.SetTowerDamage(towerDamage);
+
+            if (bullet != null)
+            {
+                bullet.SetTarget(_target);
+            }
+            firePointIndex++;
         }
     }
 
