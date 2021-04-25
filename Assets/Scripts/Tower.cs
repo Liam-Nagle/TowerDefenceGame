@@ -107,7 +107,7 @@ public class Tower : MonoBehaviour
 
         if (firePointIndex < firePoint.Length)
         {
-            GameObject bulletGO = (GameObject)Instantiate(bulletPrefab, firePoint[firePointIndex].position, firePoint[firePointIndex].rotation, GetComponent<Transform>());
+            GameObject bulletGO = (GameObject)Instantiate(bulletPrefab, firePoint[firePointIndex].position, firePoint[firePointIndex].rotation, bulletPrefab.GetComponent<Transform>());
             Bullet bullet = bulletGO.GetComponent<Bullet>();
             bullet.SetEnemy(_targetEnemy);
             bullet.SetTowerDamage(towerDamage);
