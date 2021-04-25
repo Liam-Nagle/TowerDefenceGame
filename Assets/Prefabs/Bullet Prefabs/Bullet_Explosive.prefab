@@ -7,9 +7,49 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -8586154170622945374, guid: 6850cf99122ae8e4c939c7212701162e, type: 3}
+      propertyPath: Pan2D
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8586154170622945374, guid: 6850cf99122ae8e4c939c7212701162e, type: 3}
+      propertyPath: m_Pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8586154170622945374, guid: 6850cf99122ae8e4c939c7212701162e, type: 3}
+      propertyPath: m_Volume
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: -8586154170622945374, guid: 6850cf99122ae8e4c939c7212701162e, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 5c6caeb373bcf7e4fbfceb167fea4500, type: 3}
+    - target: {fileID: -8586154170622945374, guid: 6850cf99122ae8e4c939c7212701162e, type: 3}
+      propertyPath: BypassEffects
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8586154170622945374, guid: 6850cf99122ae8e4c939c7212701162e, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8586154170622945374, guid: 6850cf99122ae8e4c939c7212701162e, type: 3}
+      propertyPath: BypassReverbZones
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8586154170622945374, guid: 6850cf99122ae8e4c939c7212701162e, type: 3}
+      propertyPath: BypassListenerEffects
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8586154170622945374, guid: 6850cf99122ae8e4c939c7212701162e, type: 3}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8586154170622945374, guid: 6850cf99122ae8e4c939c7212701162e, type: 3}
+      propertyPath: reverbZoneMixCustomCurve.m_Curve.Array.data[0].value
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1843748472931122377, guid: 6850cf99122ae8e4c939c7212701162e, type: 3}
       propertyPath: m_Name
-      value: Bullet_Explosive Variant
+      value: Bullet_Explosive
       objectReference: {fileID: 0}
     - target: {fileID: 1843748472931122378, guid: 6850cf99122ae8e4c939c7212701162e, type: 3}
       propertyPath: m_Sprite
@@ -37,11 +77,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1843748472931122379, guid: 6850cf99122ae8e4c939c7212701162e, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.4
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1843748472931122379, guid: 6850cf99122ae8e4c939c7212701162e, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.4
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1843748472931122379, guid: 6850cf99122ae8e4c939c7212701162e, type: 3}
       propertyPath: m_LocalPosition.x
