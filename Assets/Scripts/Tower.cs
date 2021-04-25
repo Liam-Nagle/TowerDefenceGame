@@ -16,7 +16,6 @@ public class Tower : MonoBehaviour
     public LineRenderer lineRenderer;
     public ParticleSystem impactEffect;
     public Light impactLight;
-    public AudioSource fireAudio;
     private float fireCountdown = 0f;
 
     private Vector3 _towerPosition;
