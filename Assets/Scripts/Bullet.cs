@@ -13,6 +13,8 @@ public class Bullet : MonoBehaviour
     //speed of the projectile
     public float speed;
 
+    Vector3 dir;
+
     public void SetTarget(Transform _target)
     {
         target = _target;
@@ -30,7 +32,7 @@ public class Bullet : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        dir = target.position - transform.position;
     }
 
     // Update is called once per frame
@@ -42,7 +44,6 @@ public class Bullet : MonoBehaviour
             return;
         }
 
-        Vector3 dir = target.position - transform.position;
         float distanceThisFrame = speed * Time.deltaTime;
 
         if(dir.magnitude <= distanceThisFrame)
