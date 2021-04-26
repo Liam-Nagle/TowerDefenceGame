@@ -7,15 +7,18 @@ using UnityEngine.UI;
 
 public class UI : MonoBehaviour
 {
-	//list of towers (UI)
-	public List<Image> towerImage;
 	private int spawnID = -1;
 	public GameObject _towersUI;
 	public GameObject _upgradesUI;
 	private bool _towerSelected;
 	private TowerSpawning towerSpawning;
-	public Tilemap Placeable;
 	private List<Tower> towers = new List<Tower>();
+
+	//Unity allocations
+	public List<Image> towerImage;
+	public Tilemap Placeable;
+	public AudioSource audioSelect;
+
 
 	private void Start()
 	{
@@ -92,6 +95,7 @@ public class UI : MonoBehaviour
 			spawnID = id;
 			//Highlight the tower
 			towerImage[spawnID].color = Color.white;
+			audioSelect.Play(0);
 		}
 	}
 

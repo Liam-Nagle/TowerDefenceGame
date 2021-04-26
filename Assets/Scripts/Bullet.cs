@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+    public Transform spawnProjectileRoot;
 
     private Transform target;
     private Enemy targetEnemy;
