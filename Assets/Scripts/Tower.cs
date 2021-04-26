@@ -35,7 +35,7 @@ public class Tower : MonoBehaviour
     void Start()
     {
         _rangeSpriteRenderer = transform.GetChild(0).GetComponent<SpriteRenderer>();
-        _rangeSpriteRenderer.transform.localScale = new Vector2(range, range);
+        _rangeSpriteRenderer.transform.localScale = new Vector2((1 / transform.localScale.x) * 2 * range, (1 / transform.localScale.y) * 2 * range);
         InvokeRepeating("UpdateTarget", 0f, 0.1f);
     }
 
