@@ -54,7 +54,7 @@ MonoBehaviour:
   lineRenderer: {fileID: 0}
   impactEffect: {fileID: 0}
   impactLight: {fileID: 0}
-  bulletPrefab: {fileID: 1843748472931122377, guid: 6850cf99122ae8e4c939c7212701162e, type: 3}
+  bulletPrefab: {fileID: 3941183205972664842, guid: 6850cf99122ae8e4c939c7212701162e, type: 3}
   firePoint:
   - {fileID: 1594306850686519542}
 --- !u!212 &2232970723599201064

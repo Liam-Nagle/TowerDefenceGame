@@ -19,13 +19,13 @@ public class Tower : MonoBehaviour
     private float fireCountdown = 0f;
 
     private Vector3 _towerPosition;
-    //Get range sprite
     private SpriteRenderer _rangeSpriteRenderer;
     private int _towerID;
     private Transform _target;
     private Enemy _targetEnemy;
+    private Transform _spawnedProjectiles;
 
-    public GameObject bulletPrefab;
+    public Bullet bulletPrefab;
     public Transform[] firePoint;
     private int firePointIndex;
 
@@ -107,10 +107,10 @@ public class Tower : MonoBehaviour
 
         if (firePointIndex < firePoint.Length)
         {
-            GameObject bulletGO = (GameObject)Instantiate(bulletPrefab, firePoint[firePointIndex].position, firePoint[firePointIndex].rotation, bulletPrefab.GetComponent<Transform>());
-            Bullet bullet = bulletGO.GetComponent<Bullet>();
+            Bullet bullet = Instantiate(bulletPrefab, firePoint[firePointIndex].position, firePoint[firePointIndex].rotation);
             bullet.SetEnemy(_targetEnemy);
             bullet.SetTowerDamage(towerDamage);
+            bullet.transform.SetParent(_spawnedProjectiles);
 
             if (bullet != null)
             {
@@ -149,6 +149,11 @@ public class Tower : MonoBehaviour
     public void SetTowerPosition(Vector3 towerPosition)
     {
         _towerPosition = towerPosition;
+    }
+
+    public void SetSpawnedProjectiles(Transform spawnedProjectiles)
+    {
+        _spawnedProjectiles = spawnedProjectiles;
     }
 
 }
