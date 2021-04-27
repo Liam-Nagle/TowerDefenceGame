@@ -10,15 +10,18 @@ public class UI : MonoBehaviour
 	private int spawnID = -1;
 	public GameObject _towersUI;
 	public GameObject _upgradesUI;
+	private GameState _gameState;
 	private bool _towerSelected;
 	private TowerSpawning towerSpawning;
 	private List<Tower> towers = new List<Tower>();
+	private Transform healthVector;
+
 
 	//Unity allocations
 	public List<Image> towerImage;
 	public Tilemap Placeable;
 	public AudioSource audioSelect;
-
+	public GameObject[] numberSprites = new GameObject[10];
 
 	private void Start()
 	{
@@ -26,6 +29,9 @@ public class UI : MonoBehaviour
 		_upgradesUI.SetActive(false);
 		_towersUI.SetActive(true);
 		towerSpawning = GetComponent<TowerSpawning>();
+		_gameState = GetComponent<GameState>();
+		healthVector = GameObject.Find("Health").GetComponent<Transform>();
+		UpdateHealth();
 	}
 	void Update()
 	{
@@ -80,6 +86,7 @@ public class UI : MonoBehaviour
 				towers[i].Deselect();
 			}
 		}
+
 	}
 	public void SelectTower(int id)
 	{
@@ -130,5 +137,29 @@ public class UI : MonoBehaviour
 	public void SetTowers(Tower tower)
     {
 		towers.Add(tower);
+    }
+
+	public void UpdateHealth()
+    {
+        foreach (var item in GameObject.FindGameObjectsWithTag("HealthUI"))
+        {
+			Destroy(item);
+        }
+		float pos = 2.8f;
+		if (_gameState.health > 0)
+        {
+			int healthInt = _gameState.health;
+            for (int i = 0; i < _gameState.health.ToString().Length; i++)
+            {
+				int digit = healthInt % 10;
+				healthInt /= 10;
+				Instantiate(numberSprites[digit], healthVector.position + new Vector3(pos, 0, 0), healthVector.rotation);
+				pos -= 0.8f;
+			}
+
+		} else
+        {
+			Instantiate(numberSprites[0], healthVector.position + new Vector3(pos, 0, 0), healthVector.rotation);
+		}
     }
 }
