@@ -56,8 +56,7 @@ public class Enemy : MonoBehaviour
 	{
 		if (waypointIndex >= Waypoints.waypoints.Length - 1)
 		{
-			Destroy(gameObject);
-			Spawner.EnemiesAlive--;
+			Die();
 			return;
 		}
 		waypointIndex++;
@@ -68,6 +67,7 @@ public class Enemy : MonoBehaviour
     {
 		Destroy(gameObject);
 		Spawner.EnemiesAlive--;
+
 	}
 
 	public void TakeDamage(int damage)
