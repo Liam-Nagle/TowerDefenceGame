@@ -6,6 +6,7 @@ public class GameState : MonoBehaviour
 {
     public int health;
     public int money;
+    public int wave = 0;
 
     void Start()
     {
@@ -14,6 +15,6 @@ public class GameState : MonoBehaviour
 
     void Update()
     {
-        
+
     }
 }

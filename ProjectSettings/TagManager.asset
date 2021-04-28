@@ -8,6 +8,7 @@ TagManager:
   - Spawner
   - Enemy
   - HealthUI
+  - WaveUI
   layers:
   - Default
   - TransparentFX

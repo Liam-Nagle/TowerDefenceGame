@@ -14,7 +14,8 @@ public class UI : MonoBehaviour
 	private bool _towerSelected;
 	private TowerSpawning towerSpawning;
 	private List<Tower> towers = new List<Tower>();
-	private Transform healthVector;
+	private Transform _healthVector;
+	private Transform _waveVector;
 
 
 	//Unity allocations
@@ -22,6 +23,7 @@ public class UI : MonoBehaviour
 	public Tilemap Placeable;
 	public AudioSource audioSelect;
 	public GameObject[] numberSprites = new GameObject[10];
+	public Transform spawnUIRoot;
 
 	private void Start()
 	{
@@ -30,8 +32,10 @@ public class UI : MonoBehaviour
 		_towersUI.SetActive(true);
 		towerSpawning = GetComponent<TowerSpawning>();
 		_gameState = GetComponent<GameState>();
-		healthVector = GameObject.Find("Health").GetComponent<Transform>();
+		_healthVector = GameObject.Find("Health").GetComponent<Transform>();
+		_waveVector = GameObject.Find("Wave").GetComponent<Transform>();
 		UpdateHealth();
+		UpdateWave();
 	}
 	void Update()
 	{
@@ -153,13 +157,38 @@ public class UI : MonoBehaviour
             {
 				int digit = healthInt % 10;
 				healthInt /= 10;
-				Instantiate(numberSprites[digit], healthVector.position + new Vector3(pos, 0, 0), healthVector.rotation);
+				Instantiate(numberSprites[digit], _healthVector.position + new Vector3(pos, 0, 0), _healthVector.rotation, spawnUIRoot);
 				pos -= 0.8f;
 			}
 
 		} else
         {
-			Instantiate(numberSprites[0], healthVector.position + new Vector3(pos, 0, 0), healthVector.rotation);
+			Instantiate(numberSprites[0], _healthVector.position + new Vector3(pos, 0, 0), _healthVector.rotation, spawnUIRoot);
 		}
     }
+
+	public void UpdateWave()
+    {
+		foreach (var item in GameObject.FindGameObjectsWithTag("WaveUI"))
+		{
+			Destroy(item);
+		}
+		float pos = 2.8f;
+		if (_gameState.wave > 0)
+		{
+			int waveInt = _gameState.wave;
+			for (int i = 0; i < _gameState.wave.ToString().Length; i++)
+			{
+				int digit = waveInt % 10;
+				waveInt /= 10;
+				Instantiate(numberSprites[digit], _waveVector.position + new Vector3(pos, 0, 0), _waveVector.rotation, spawnUIRoot);
+				pos -= 0.8f;
+			}
+
+		}
+		else
+		{
+			Instantiate(numberSprites[0], _waveVector.position + new Vector3(pos, 0, 0), _waveVector.rotation, spawnUIRoot);
+		}
+	}
 }
