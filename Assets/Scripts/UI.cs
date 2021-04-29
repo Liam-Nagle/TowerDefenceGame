@@ -22,7 +22,8 @@ public class UI : MonoBehaviour
 	public List<Image> towerImage;
 	public Tilemap Placeable;
 	public AudioSource audioSelect;
-	public GameObject[] numberSprites = new GameObject[10];
+	public GameObject[] healthNumberSprites = new GameObject[10];
+	public GameObject[] waveNumberSprites = new GameObject[10];
 	public Transform spawnUIRoot;
 
 	private void Start()
@@ -157,13 +158,13 @@ public class UI : MonoBehaviour
             {
 				int digit = healthInt % 10;
 				healthInt /= 10;
-				Instantiate(numberSprites[digit], _healthVector.position + new Vector3(pos, 0, 0), _healthVector.rotation, spawnUIRoot);
+				Instantiate(healthNumberSprites[digit], _healthVector.position + new Vector3(pos, 0, 0), _healthVector.rotation, spawnUIRoot);
 				pos -= 0.8f;
 			}
 
 		} else
         {
-			Instantiate(numberSprites[0], _healthVector.position + new Vector3(pos, 0, 0), _healthVector.rotation, spawnUIRoot);
+			Instantiate(healthNumberSprites[0], _healthVector.position + new Vector3(pos, 0, 0), _healthVector.rotation, spawnUIRoot);
 		}
     }
 
@@ -181,14 +182,14 @@ public class UI : MonoBehaviour
 			{
 				int digit = waveInt % 10;
 				waveInt /= 10;
-				Instantiate(numberSprites[digit], _waveVector.position + new Vector3(pos, 0, 0), _waveVector.rotation, spawnUIRoot);
+				Instantiate(waveNumberSprites[digit], _waveVector.position + new Vector3(pos, 0, 0), _waveVector.rotation, spawnUIRoot);
 				pos -= 0.8f;
 			}
 
 		}
 		else
 		{
-			Instantiate(numberSprites[0], _waveVector.position + new Vector3(pos, 0, 0), _waveVector.rotation, spawnUIRoot);
+			Instantiate(waveNumberSprites[0], _waveVector.position + new Vector3(pos, 0, 0), _waveVector.rotation, spawnUIRoot);
 		}
 	}
 }

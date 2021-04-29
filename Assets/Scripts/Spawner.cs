@@ -18,18 +18,19 @@ public class Spawner : MonoBehaviour
     private int Difficulty = 1;
     private float timer = 0.0f;
     private bool spawn = true;
+    private GameState _gameState;
+    private UI _UI;
     public static int EnemiesAlive;
 
     public Text wavesText;
 
     private void Start()
     {
-        //Adds 1 Enemy to enemies list
         waveIndex = 1;
-        //Start defines wave 1 then update defines more waves? or again from a file SOMEHOW
+        _gameState = GetComponent<GameState>();
+        _UI = GetComponent<UI>();
     }
-
-    private void Update()
+        private void Update()
     {
         timer += Time.deltaTime;
 
@@ -38,6 +39,7 @@ public class Spawner : MonoBehaviour
             return;
         } else if(spawn)
         {
+            _gameState.wave = waveIndex;
             enemies.Clear();
             spawn = false;
             enemies.Add(new EnemyBlueprint(Enemy1, enemiesPerWave(), 1, 1));
@@ -45,6 +47,7 @@ public class Spawner : MonoBehaviour
             StartCoroutine(SpawnWave());
             raiseDifficulty();
             waveIndex++;
+            _UI.UpdateWave();
         }
 
         //        if (countdown <= 0f)
