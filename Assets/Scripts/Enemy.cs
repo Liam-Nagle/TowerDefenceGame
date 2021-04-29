@@ -13,10 +13,14 @@ public class Enemy : MonoBehaviour
 	private Transform target;
 	private int waypointIndex;
 	private Animator animate;
+	private UI _UI;
+	private GameState _gameState;
 
 	public void Start()
 	{
 		target = Waypoints.waypoints[0];
+		_UI = GameObject.Find("GameMaster").GetComponent<UI>();
+		_gameState = GameObject.Find("GameMaster").GetComponent<GameState>();
 
 		// Gets Animator Component Off Enemy and Sets the Speed to Enemy Speed.
 		//animate = GetComponent<Animator>();
@@ -56,7 +60,7 @@ public class Enemy : MonoBehaviour
 	{
 		if (waypointIndex >= Waypoints.waypoints.Length - 1)
 		{
-			Die();
+			End();
 			return;
 		}
 		waypointIndex++;
@@ -69,6 +73,14 @@ public class Enemy : MonoBehaviour
 		Spawner.EnemiesAlive--;
 
 	}
+
+	void End()
+    {
+		Destroy(gameObject);
+		Spawner.EnemiesAlive--;
+		_gameState.health -= 1;
+		_UI.UpdateHealth();
+    }
 
 	public void TakeDamage(int damage)
     {
