@@ -89,16 +89,6 @@ public class Tower : MonoBehaviour
         fireCountdown -= Time.deltaTime;
     }
 
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.DrawWireSphere(transform.position, range);
-    }
-
-    void LockOnTarget()
-    {
-        Vector3 dir = _target.position - transform.position;
-    }
-
     void Shoot()
     {
         if (firePointIndex >= firePoint.Length)
